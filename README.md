@@ -72,20 +72,16 @@ pandoc -N --quiet --variable "geometry=margin=1.2in" --variable mainfont="Noto S
 29. Φτιάχνετε ένα αρχείο `.lua` π.χ. iphone.lua (με ονομα της επιλογής σας)
 30. το ανοίγετε και κάνετε copy-paste το παρακάτω: 
   ```
-  function Image(img)
-        local stringify = pandoc.utils.stringify
-        if img.classes:find('figure',1) then
-          local fn = img.src
-          --print(fn)
-          local f = io.open("figures/" .. fn, 'r')
-          local doc = pandoc.read(f:read('*a'))
-          f:close()
-          local figid = string.sub(fn,1,string.len(fn)-3)
-          local src = stringify(doc.meta.image_url) or "src has not been set"
-          src = "." .. src
-          local caption = stringify(doc.meta.caption) 
-          return pandoc.Image(caption,src,nil,"fig:" .. figid)
-        end
-  end
+function Image(img)
+      if img.classes:find('epigraph',1) then
+        local f = io.open("quotes/" .. img.src, 'r')
+        local doc = pandoc.read(f:read('*a'))
+        f:close()
+        local caption = pandoc.utils.stringify(doc.meta.caption) or "Epigraph has not been set"
+        local person = pandoc.utils.stringify(doc.meta.person) or "Person has not been set"
+        local epigraph = "> " .. caption .. " " .. person
+        return pandoc.RawInline('markdown',epigraph)
+      end
+end
   ```
-30. Αλλάζετε το `figure` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `figures/` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
+30. Αλλάζετε το `epigraph` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `quotes/` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
