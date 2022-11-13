@@ -1,3 +1,8 @@
+### Πρωτα απ'ολα ειναι σημαντικο να σημειωθει οτι αυτο το guide δε θα ειχε φτιαχτει χωρις την καθοδηγηση της ομαδας: [second-time-is-the-charm](https://github.com/second-time-is-the-charm) <br> Πιο συγκεκριμενα του συμφοιτητη :
+|github profile | ονοματεπωνυμο | ΑΜ |
+| --- | --- | --- | 
+|[artopodama](https://github.com/artopodama/) | Giannis Anastasopoulos | inf2021017 |
+# ΕΙΝΑΙ ΣΗΜΑΝΤΙΚΟ ΟΙ ΠΑΡΑΚΑΤΩ ΟΔΗΓΙΕΣ ΝΑ ΑΚΟΛΟΥΘΗΘΟΥΝ ΑΚΡΙΒΩΣ ΧΩΡΙΣ ΝΑ ΠΡΟΣΠΕΡΑΣΤΕΙ ΚΑΠΟΙΟ ΒΗΜΑ:
 # pandoc: `Eγκατάσταση και Set up` 
 1. Eκτελείτε την εντολή `sudo pacman -S pandoc`
 2. Τσεκάρετε αν σας έχει κατέβει με την εντολή `pandoc --version` (Αν σας δείχνει απο κάτω το version του pandoc σημαίνει ότι το έχετε κατεβάσει π.χ. `pandoc 2.19.2`)
@@ -47,29 +52,31 @@ pandoc -N --quiet --variable "geometry=margin=1.2in" --variable mainfont="Noto S
   ```
 16. Βγαίνεται από το αρχείο `make-latex.sh` και ξαναπάτε πίσω στον φάκελο `kallipos`
 ### Επιλογή θέματος:
-17. Μπαίνετε στον φάκελο text διαλέγεται ένα μόνο από τα `ch0(από το 1-8).txt` αρχεία και το ανοίγετε
+17. Μπαίνετε στον φάκελο `text` διαλέγεται ένα μόνο από τα `ch0(από το 1-8).txt` αρχεία και το ανοίγετε
 18. Διαβάζεται κυριώς την περίληψη του κάθε κεφαλαίου (δηλαδή του κάθε `ch0(από το 1-8).txt` αρχείου)
 19. Βλέπεται για το πάνω σε τι αναφέρεται το κεφάλαιο
 20. Ψάχνεται ένα μέρος (κάτω απο κάποια παράγραφός) στο οποίο θα μπορούσατε να αναπτύξετε το κείμενο και να ταιριάζει με το περιεχόμενο του βιβλίου.
-(π.χ. αν μιλάει για την apple θα πρέπει να γράψετε μία παράγραφος με πληροφορίες που να αφορούν την apple τροποποιώντας το ώστε να ταιριάζει με το κείμενο του βιβλίου)
+(π.χ. αν μιλάει για την apple θα πρέπει να γράψετε μία παράγραφος με πληροφορίες που να αφορούν την apple τροποποιώντας το ώστε να ταιριάζει με το κείμενο του βιβλίου ) <br> 
+`Σαν δηλαδη μια υποσημειωση μεσα στο κειμενο του βιβλιου`
 21. Δημιουργείται το περιεχόμενο σας με βάση το βήμα `20.` δηλαδή μία παράγραφος με έναν τίτλο.
 22. Δημιουργείται ένα αρχείο `.md` με το όνομα του θέματος σας το οποίο θα περιέχει: 
     ```
     ---
     title: Ο τίτλος του περιοχομενού σας
     caption: 'Το περιεχομενό σας'
-    person: το ονοματεπώνυμό σας και το AM σας
+    name: το ονοματεπώνυμό σας 
+    AM: Ο αριθμος μητρωου σας 
     ---
     ```
 ### Πρόσθεση του θέματος στο βιβλίο:
-23. Στο σημείο που επιλέξατε να το τοποθετήσετε πατήστε enter γράψτε `![][Το_Όνομα_Tου_MD_Αρχείου_σας.md]{.Το_Όνομα_Tου_LUA_Αρχείου_σας}` <br>
-π.χ `![][iphone.md]{.iphone}`
+23. Στο σημείο που επιλέξατε να το τοποθετήσετε πατήστε `enter` γράψτε `![][Το_Όνομα_Tου_MD_Αρχείου_σας.md]{.Το_Όνομα_Tου_LUA_Αρχείου_σας}` <br>
+π.χ `![][iphone.md]{.iphone}` και μετα παλι `enter` αλλιως δε θα το δεχτει.
 ### Δημιουργία `.lua` αρχείου:
 24. ξαναπάτε πίσω στον φάκελο `kallipos`
 25. Δημιουργείτε έναν φάκελο με ένα όνομα της επιλογής σας 
 27. Mέσα σε αυτόν τοποθετείτε το .md file σας
 28. ξαναπάτε πίσω στον φάκελο `kallipos`
-29. Φτιάχνετε ένα αρχείο `.lua` π.χ. iphone.lua (με ονομα της επιλογής σας)
+29. Φτιάχνετε ένα αρχείο `.lua` π.χ. MyFilter.lua (με ονομα της επιλογής σας)
 30. το ανοίγετε και κάνετε copy-paste το παρακάτω: 
   ```
 function Image(img)
@@ -77,11 +84,45 @@ function Image(img)
         local f = io.open("quotes/" .. img.src, 'r')
         local doc = pandoc.read(f:read('*a'))
         f:close()
-        local caption = pandoc.utils.stringify(doc.meta.caption) or "Epigraph has not been set"
-        local person = pandoc.utils.stringify(doc.meta.person) or "Person has not been set"
-        local epigraph = "> " .. caption .. " " .. person
-        return pandoc.RawInline('markdown',epigraph)
+        local caption = pandoc.utils.stringify(doc.meta.caption) 
+        local name = pandoc.utils.stringify(doc.meta.name)
+        local AM = pandoc.utils.stringify(doc.meta.AM)
+        local content = "> " .. caption .. "  \n>" .. "Ονοματεπωνυμο Φοιτητη:" .. name .. "Aριθμος Mητρωου:" .. AM
+        return pandoc.RawInline('markdown',content)
       end
 end
   ```
-30. Αλλάζετε το `epigraph` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `quotes/` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
+30. Αλλάζετε το ` 'epigraph' ` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `"quotes/"` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
+31. Μπαινετε στο αρχειο `make-latex.sh` και θα βρειτε αυτη την εντολη μεσα απο το αρχειο:
+   ```
+   for filename in text/ch*.txt; do
+   [ -e "$filename" ] || continue
+    pandoc --lua-filter=extras.lua "$filename" --to markdown | pandoc --lua-filter=extras.lua --to markdown | ΕΔΩ |pandoc --lua-filter=epigraph.lua --to markdown | pandoc --lua-filter=adda.lua --to markdown | pandoc --lua-filter=figure.lua --to markdown | pandoc --lua-filter=footnote.lua --to markdown | pandoc --filter pandoc-fignos --to markdown | pandoc --metadata-file=meta.yml --top-level-division=chapter --citeproc --bibliography=bibliography/"$(basename "$filename" .txt).bib" --reference-location=section --wrap=none --to latex > latex/"$(basename "$filename" .txt).tex" 
+done 
+   ```
+ 32. Eκει που εχω γραψει τη λεξη `ΕΔΩ` θα γραψετε την εντολη `pandoc --lua-filter=Το_Όνομα_Tου_LUA_Αρχείου_σας.lua --to markdown`
+ 33. βαζοντας το `.lua` Αρχείο σας εκει που λεω `Το_Όνομα_Tου_LUA_Αρχείου_σας.lua`
+ 34. θα την κανετε `copy` και θα την αντικαταστησετε με την προηγουμενη εντολη. (την αρχικη)
+ ### Δημιουργια του Βιβλιου σε pdf:
+ 34. θα δημιουργησετε ενα φακελο `mypictures/` μεσα στον φακελο `kallipos/`
+ 35. θα δημιουργησετε ενα φακελο `book/` μεσα στον φακελο `kallipos/`
+ 36. θα τρεξετε στο terminal την εντολη `./make-latex.sh
+ 37. θα μεταφερεται το `book.pdf` απο τον φακελο `kallipos` στον φακελο `book`
+ 38. θα ανοιξετε το book.pdf και θα κανετε screenshot το περιεχομενο σας αλλα θα πρεπει να φαινεται η σελιδα και να πειτε ποιο κεφαλαιο επιλεξατε
+ 39. θα μεταφερεται το screenshot στον φακελο `mypictures/`
+ 40. και θα γραψετε στο terminal τις παρακατω εντολες μεσα απο το directory `kallipos/`:
+     ```
+     git add .
+     git commit -m "update book"
+     git push origin
+     ```
+ 41. γραφετε το username και το token σας
+ ### Δημιουργια παραδοτεου:
+ 42. Στη συνεχεια στο discussions θα βαλετε:
+     - ως εικονα την screenshot που βγαλατε 
+     - link απο το repository στο github στο οποιο εχετε το αρχειο `.lua` η αλλιως το φιλτρο σας
+     - link απο το repository στο github στο οποιο εχετε το book.pdf
+     - link απο το repository στο github στο οποιο εχετε το αρχειο `.md` σας
+     - link απο το repository στο github στο οποιο εχετε το screenshot σας
+     - link την αναφορα σας
+ 43. Τελος
