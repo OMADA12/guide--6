@@ -62,6 +62,7 @@ pandoc -N --quiet --variable "geometry=margin=1.2in" --variable mainfont="Noto S
 22. Δημιουργείται ένα αρχείο `.md` με το όνομα του θέματος σας το οποίο θα περιέχει: 
     ```
     ---
+    title: Ο τιτλος σας
     caption: 'Το περιεχομενό σας'
     name: το ονοματεπώνυμό σας 
     AM: Ο αριθμος μητρωου σας 
