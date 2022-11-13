@@ -92,37 +92,37 @@ function Image(img)
       end
 end
   ```
-30. Αλλάζετε το ` 'epigraph' ` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `"quotes/"` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
-31. Μπαινετε στο αρχειο `make-latex.sh` και θα βρειτε αυτη την εντολη μεσα απο το αρχειο:
+31. Αλλάζετε το ` 'epigraph' ` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `"quotes/"` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
+32. Μπαινετε στο αρχειο `make-latex.sh` και θα βρειτε αυτη την εντολη μεσα απο το αρχειο:
    ```
    for filename in text/ch*.txt; do
    [ -e "$filename" ] || continue
     pandoc --lua-filter=extras.lua "$filename" --to markdown | pandoc --lua-filter=extras.lua --to markdown | ΕΔΩ |pandoc --lua-filter=epigraph.lua --to markdown | pandoc --lua-filter=adda.lua --to markdown | pandoc --lua-filter=figure.lua --to markdown | pandoc --lua-filter=footnote.lua --to markdown | pandoc --filter pandoc-fignos --to markdown | pandoc --metadata-file=meta.yml --top-level-division=chapter --citeproc --bibliography=bibliography/"$(basename "$filename" .txt).bib" --reference-location=section --wrap=none --to latex > latex/"$(basename "$filename" .txt).tex" 
 done 
    ```
- 32. Eκει που εχω γραψει τη λεξη `ΕΔΩ` θα γραψετε την εντολη `pandoc --lua-filter=Το_Όνομα_Tου_LUA_Αρχείου_σας.lua --to markdown`
- 33. βαζοντας το `.lua` Αρχείο σας εκει που λεω `Το_Όνομα_Tου_LUA_Αρχείου_σας.lua`
- 34. θα την κανετε `copy` και θα την αντικαταστησετε με την προηγουμενη εντολη. (την αρχικη)
+ 33. Eκει που εχω γραψει τη λεξη `ΕΔΩ` θα γραψετε την εντολη `pandoc --lua-filter=Το_Όνομα_Tου_LUA_Αρχείου_σας.lua --to markdown`
+ 34. βαζοντας το `.lua` Αρχείο σας εκει που λεω `Το_Όνομα_Tου_LUA_Αρχείου_σας.lua`
+ 35. θα την κανετε `copy` και θα την αντικαταστησετε με την προηγουμενη εντολη. (την αρχικη)
  ### Δημιουργια του Βιβλιου σε pdf:
- 34. θα δημιουργησετε ενα φακελο `mypictures/` μεσα στον φακελο `kallipos/`
- 35. θα δημιουργησετε ενα φακελο `book/` μεσα στον φακελο `kallipos/`
- 36. θα τρεξετε στο terminal την εντολη `./make-latex.sh
- 37. θα μεταφερεται το `book.pdf` απο τον φακελο `kallipos` στον φακελο `book`
- 38. θα ανοιξετε το book.pdf και θα κανετε screenshot το περιεχομενο σας αλλα θα πρεπει να φαινεται η σελιδα και να πειτε ποιο κεφαλαιο επιλεξατε
- 39. θα μεταφερεται το screenshot στον φακελο `mypictures/`
- 40. και θα γραψετε στο terminal τις παρακατω εντολες μεσα απο το directory `kallipos/`:
+ 36. θα δημιουργησετε ενα φακελο `mypictures/` μεσα στον φακελο `kallipos/`
+ 37. θα δημιουργησετε ενα φακελο `book/` μεσα στον φακελο `kallipos/`
+ 38. θα τρεξετε στο terminal την εντολη `./make-latex.sh
+ 39. θα μεταφερεται το `book.pdf` απο τον φακελο `kallipos` στον φακελο `book`
+ 40. θα ανοιξετε το book.pdf και θα κανετε screenshot το περιεχομενο σας αλλα θα πρεπει να φαινεται η σελιδα και να πειτε ποιο κεφαλαιο επιλεξατε
+ 41. θα μεταφερεται το screenshot στον φακελο `mypictures/`
+ 42. και θα γραψετε στο terminal τις παρακατω εντολες μεσα απο το directory `kallipos/`:
      ```
      git add .
      git commit -m "update book"
      git push origin
      ```
- 41. γραφετε το username και το token σας
+ 43. γραφετε το username και το token σας
  ### Δημιουργια παραδοτεου:
- 42. Στη συνεχεια στο discussions θα βαλετε:
+ 44. Στη συνεχεια στο discussions θα βαλετε:
      - ως εικονα την screenshot που βγαλατε 
      - link απο το repository στο github στο οποιο εχετε το αρχειο `.lua` η αλλιως το φιλτρο σας
      - link απο το repository στο github στο οποιο εχετε το book.pdf
      - link απο το repository στο github στο οποιο εχετε το αρχειο `.md` σας
      - link απο το repository στο github στο οποιο εχετε το screenshot σας
      - link την αναφορα σας
- 43. Τελος
+ 45. Τελος
