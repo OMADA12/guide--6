@@ -1,5 +1,5 @@
-### Πρωτα απ'ολα ειναι σημαντικο να σημειωθει οτι αυτο το guide δε θα ειχε φτιαχτει χωρις την καθοδηγηση της ομαδας: [second-time-is-the-charm](https://github.com/second-time-is-the-charm) <br> Πιο συγκεκριμενα του συμφοιτητη :
-|github profile | ονοματεπωνυμο | ΑΜ |
+### Πρώτα απ'όλα είναι σημαντικό να σημειωθεί ότι αυτό το guide δε θα είχε φτιαχτεί χωρίς την καθοδήγηση της ομάδας: [second-time-is-the-charm](https://github.com/second-time-is-the-charm) <br> Πιο συγκεκριμένα του συμφοιτητή :
+| github profile | ονοματεπωνυμο | ΑΜ |
 | --- | --- | --- | 
 |[artopodama](https://github.com/artopodama/) | Giannis Anastasopoulos | inf2021017 |
 # ΕΙΝΑΙ ΣΗΜΑΝΤΙΚΟ ΟΙ ΠΑΡΑΚΑΤΩ ΟΔΗΓΙΕΣ ΝΑ ΑΚΟΛΟΥΘΗΘΟΥΝ ΑΚΡΙΒΩΣ ΧΩΡΙΣ ΝΑ ΠΡΟΣΠΕΡΑΣΤΕΙ ΚΑΠΟΙΟ ΒΗΜΑ:
@@ -9,15 +9,14 @@
 3. Μετά εγκαταστείτε την εντολή pip εκτελόντας την εντολή `sudo pacman -S python-pip`
 4. Μετά: `sudo pip install pandoc-fignos`
 5. Eκτείλεται `which pandoc` και μετά `which python` και τσεκάρετε ότι βρίσκεται στο ίδιο directory π.χ. αν λέει `/usr/bin/pandoc` και μετά `/usr/bin/python` είστε εντάξει 
-6. κατεβάζεται το lua με την εντολή `sudo pacman -S lua` 
-7. Τέλος.
-
+# OPTIONAL: `εγκατάσταση lua`
+1. Kατεβάζεται το lua με την εντολή `sudo pacman -S lua` 
 # Παραδοτέο 6
 ### Δημιουργία αποθετηρίου:
 1. Μπαίνετε πρώτα στο συγκεκριμένο github αποθετήριο: [kallipos](https://github.com/mibook/kallipos)
 2. Το κάνετε `fork` στο δικό σας αποθετήριο.
 3. Πάτε στο terminal και εκτελείte την εντολή: `git clone https://github.com/'το username sas'/kallipos`
-4. μετά την εντολή `cd kallipos`
+4. Μετά την εντολή `cd kallipos`
 ### Πρόσθεση των submodules:
 5. Εκτελείται τις παρακάτω εντολές με την σειρά:
     ```
@@ -53,11 +52,11 @@ pandoc -N --quiet --variable "geometry=margin=1.2in" --variable mainfont="Noto S
 16. Βγαίνεται από το αρχείο `make-latex.sh` και ξαναπάτε πίσω στον φάκελο `kallipos`
 ### Επιλογή θέματος:
 17. Μπαίνετε στον φάκελο `text` διαλέγεται ένα μόνο από τα `ch0(από το 1-8).txt` αρχεία και το ανοίγετε
-18. Διαβάζεται κυριώς την περίληψη του κάθε κεφαλαίου (δηλαδή του κάθε `ch0(από το 1-8).txt` αρχείου)
+18. Διαβάζεται κυρίως την περίληψη του κάθε κεφαλαίου (δηλαδή του κάθε `ch0(από το 1-8).txt` αρχείου)
 19. Βλέπεται για το πάνω σε τι αναφέρεται το κεφάλαιο
 20. Ψάχνεται ένα μέρος (κάτω απο κάποια παράγραφός) στο οποίο θα μπορούσατε να αναπτύξετε το κείμενο και να ταιριάζει με το περιεχόμενο του βιβλίου.
 (π.χ. αν μιλάει για την apple θα πρέπει να γράψετε μία παράγραφος με πληροφορίες που να αφορούν την apple τροποποιώντας το ώστε να ταιριάζει με το κείμενο του βιβλίου ) <br> 
-`Σαν δηλαδη μια υποσημειωση μεσα στο κειμενο του βιβλιου`
+`Σαν δηλαδή μια υποσημείωση μέσα στο κείμενο του βιβλιου`
 21. Δημιουργείται το περιεχόμενο σας με βάση το βήμα `20.` δηλαδή μία παράγραφος με έναν τίτλο.
 22. Δημιουργείται ένα αρχείο `.md` με το όνομα του θέματος σας το οποίο θα περιέχει: 
     ```
@@ -65,7 +64,7 @@ pandoc -N --quiet --variable "geometry=margin=1.2in" --variable mainfont="Noto S
     title: Ο τιτλος σας
     caption: 'Το περιεχομενό σας'
     name: το ονοματεπώνυμό σας 
-    AM: Ο αριθμος μητρωου σας 
+    id: Ο αριθμος μητρωου σας 
     ---
     ```
 ### Πρόσθεση του θέματος στο βιβλίο:
@@ -86,18 +85,20 @@ function Image(img)
         f:close()
         local caption = pandoc.utils.stringify(doc.meta.caption) 
         local name = pandoc.utils.stringify(doc.meta.name)
-        local AM = pandoc.utils.stringify(doc.meta.AM)
-        local content = "> " .. caption .. "  \n>" .. "Ονοματεπωνυμο Φοιτητη:" .. name .. "Aριθμος Mητρωου:" .. AM
+        local am = pandoc.utils.stringify(doc.meta.id)
+        local content = "> " .. caption .. "  \n>" .. "Ονοματεπωνυμο Φοιτητη:" .. name .. "Aριθμος Mητρωου:" .. am
         return pandoc.RawInline('markdown',content)
       end
 end
   ```
-31. Αλλάζετε το ` 'epigraph' ` στο όνομα του `.md` αρχείου σας (χωρίς το `.md`) και το `"quotes/"` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
+ ΥΠΟΣΗΜΕΙΩΣΗ:
+> Καλό θα ήταν στο παραπάνω φίλτρο γίνουν οι κατάλληλες αλλαγές έτσι ώστε το φίλτρο να μην είναι ίδιο με το αρχικό για παράδειγμα βάζοντας εκεί που λέει `local content = "> " .. caption .. "  \n>" .. "Ονοματεπωνυμο Φοιτητή:" .. name .. "Aριθμος Mητρωου:" .. AM `  να βάλετε ανάμεσα αντί για `..."> " .. caption .. " \n> "...` να γράψετε `..."> _" .. caption .. "_  \n> "...`  ώστε η παράγραφός σας να είναι bold italic κλπ .. Για περισσότερες πληροφορίες θα σας βοηθήσει το link [Pandoc markdown Syntax](https://garrettgman.github.io/rmarkdown/authoring_pandoc_markdown.html)    
+31. Αλλάζετε το ` 'epigraph' ` στο όνομα του `.lua` αρχείου σας (χωρίς το `.lua`) και το `"quotes/"` στο όνομα του directory που έχετε μέσα το `.md` αρχείο σας
 32. Μπαινετε στο αρχειο `make-latex.sh` και θα βρειτε αυτη την εντολη μεσα απο το αρχειο:
    ```
    for filename in text/ch*.txt; do
    [ -e "$filename" ] || continue
-    pandoc --lua-filter=extras.lua "$filename" --to markdown | pandoc --lua-filter=extras.lua --to markdown | ΕΔΩ |pandoc --lua-filter=epigraph.lua --to markdown | pandoc --lua-filter=adda.lua --to markdown | pandoc --lua-filter=figure.lua --to markdown | pandoc --lua-filter=footnote.lua --to markdown | pandoc --filter pandoc-fignos --to markdown | pandoc --metadata-file=meta.yml --top-level-division=chapter --citeproc --bibliography=bibliography/"$(basename "$filename" .txt).bib" --reference-location=section --wrap=none --to latex > latex/"$(basename "$filename" .txt).tex" 
+    pandoc --lua-filter=extras.lua "$filename" --to markdown | pandoc --lua-filter=extras.lua --to markdown | ΕΔΩ |pandoc --lua-filter=epigraph.lua --to markdown |  pandoc --lua-filter=figure.lua --to markdown | pandoc --lua-filter=footnote.lua --to markdown | pandoc --filter pandoc-fignos --to markdown | pandoc --metadata-file=meta.yml --top-level-division=chapter --citeproc --bibliography=bibliography/"$(basename "$filename" .txt).bib" --reference-location=section --wrap=none --to latex > latex/"$(basename "$filename" .txt).tex" 
 done 
    ```
  33. Eκει που εχω γραψει τη λεξη `ΕΔΩ` θα γραψετε την εντολη `pandoc --lua-filter=Το_Όνομα_Tου_LUA_Αρχείου_σας.lua --to markdown`
@@ -106,9 +107,9 @@ done
  ### Δημιουργια του Βιβλιου σε pdf:
  36. θα δημιουργησετε ενα φακελο `mypictures/` μεσα στον φακελο `kallipos/`
  37. θα δημιουργησετε ενα φακελο `book/` μεσα στον φακελο `kallipos/`
- 38. θα τρεξετε στο terminal την εντολη `./make-latex.sh
+ 38. θα τρεξετε στο terminal την εντολη `./make-latex.sh`
  39. θα μεταφερεται το `book.pdf` απο τον φακελο `kallipos` στον φακελο `book`
- 40. θα ανοιξετε το book.pdf και θα κανετε screenshot το περιεχομενο σας αλλα θα πρεπει να φαινεται η σελιδα και να πειτε ποιο κεφαλαιο επιλεξατε
+ 40. θα ανοιξετε το book.pdf και `θα κανετε screenshot το περιεχομενο σας` αλλα θα πρεπει να φαινεται η σελιδα και να πειτε ποιο κεφαλαιο επιλεξατε
  41. θα μεταφερεται το screenshot στον φακελο `mypictures/`
  42. και θα γραψετε στο terminal τις παρακατω εντολες μεσα απο το directory `kallipos/`:
      ```
@@ -117,12 +118,19 @@ done
      git push origin
      ```
  43. γραφετε το username και το token σας
- ### Δημιουργια παραδοτεου:
- 44. Στη συνεχεια στο discussions θα βαλετε:
-     - ως εικονα την screenshot που βγαλατε 
-     - link απο το repository στο github στο οποιο εχετε το αρχειο `.lua` η αλλιως το φιλτρο σας
-     - link απο το repository στο github στο οποιο εχετε το book.pdf
-     - link απο το repository στο github στο οποιο εχετε το αρχειο `.md` σας
-     - link απο το repository στο github στο οποιο εχετε το screenshot σας
-     - link την αναφορα σας
+# Optional: 
+## PDF ENGINE Πρόβλημα κατά την εκτέλεσης της εντολής `./make-latex.sh`:
+1. Αν δεν σας επιτρέπει να εκτελέσεται το `./make-latex.sh` λόγο του `--pdf-engine=Xelatex` τότε θα πρέπει να εκτελέσετε την παρακάτω εντολή 
+```
+sudo pacman -S texlive-core
+```
+ ### Δημιουργία παραδοτέου:
+ 44. Στη συνέχεια στο discussions θα βάλετε:
+     - ως εικόνα την screenshot που βγάλατε 
+     - link από το repository στο github στο οποίο έχετε το αρχείο `.lua` η αλλιώς το φίλτρο σας
+     - link από το repository στο github στο οποίο έχετε το book.pdf
+     - link από το repository στο github στο οποίο έχετε το αρχειο `.md` σας
+     - link από το repository στο github στο οποίο έχετε το screenshot σας
+     - link την αναφορά σας
  45. Τελος
+made by: [OMADA12](https://github.com/OMADA12)
